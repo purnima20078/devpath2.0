@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: devpath2-backend
+    env: node
+    nodeVersion: 20
+    buildCommand: npm ci && npm run build
+    startCommand: npm run preview
+    # If you later add a custom Express entry point, replace the startCommand with e.g., "node server.js"
+    # Add any needed environment variables in the Render UI under Settings → Environment → Environment Variables
+    # Example (replace with your actual values):
+    # envVars:
+    #   - key: VITE_FIREBASE_API_KEY
+    #     value: <YOUR_FIREBASE_API_KEY>
+    #   - key: VITE_FIREBASE_PROJECT_ID
+    #     value: <YOUR_FIREBASE_PROJECT_ID>
