@@ -1,0 +1,63 @@
+{
+  "entities": {
+    "seminarHall": {
+      "title": "Seminar Hall",
+      "description": "Represents an independent seminar hall room with its active game state",
+      "properties": {
+        "hallId": { "type": "string", "description": "Unique hall identifier e.g. HALL_1" },
+        "hallName": { "type": "string", "description": "Display name e.g. Seminar Hall 1" },
+        "adminUsername": { "type": "string", "description": "Dedicated admin username e.g. GDGADMIN@SM1" },
+        "activeGameId": { "type": "string", "description": "ID of currently active game or empty" },
+        "activeGameStatus": { "type": "string", "enum": ["INACTIVE", "ACTIVE", "STOPPED"] },
+        "activeGameStartedAt": { "type": "string", "description": "ISO timestamp of game activation" },
+        "updatedAt": { "type": "string", "description": "Last update ISO timestamp" }
+      },
+      "required": ["hallId", "hallName", "adminUsername", "activeGameStatus"]
+    },
+    "gameAttempt": {
+      "title": "Game Attempt",
+      "description": "Deterministic single attempt record for a student playing a specific game in a hall",
+      "properties": {
+        "admissionNumber": { "type": "string", "description": "Student exact admission number e.g. 001/AIM/2026" },
+        "seminarHallId": { "type": "string", "description": "Associated seminar hall ID e.g. HALL_1" },
+        "gameId": { "type": "string", "description": "Game ID e.g. LOGO" },
+        "status": { "type": "string", "enum": ["in_progress", "completed", "stopped_by_admin"] },
+        "score": { "type": "number", "description": "Final awarded score" },
+        "totalQuestions": { "type": "number", "description": "Total possible points / questions" },
+        "correctAnswers": { "type": "number", "description": "Number of correct answers" },
+        "incorrectAnswers": { "type": "number", "description": "Number of incorrect answers" },
+        "timeTaken": { "type": "number", "description": "Time elapsed in seconds" },
+        "startedAt": { "type": "string", "description": "Start ISO timestamp" },
+        "completedAt": { "type": "string", "description": "Completion ISO timestamp" }
+      },
+      "required": ["admissionNumber", "seminarHallId", "gameId", "status", "score"]
+    },
+    "gameSession": {
+      "title": "Game Session",
+      "description": "Archived session history of a game event conducted in a seminar hall",
+      "properties": {
+        "sessionId": { "type": "string", "description": "Unique session ID" },
+        "gameId": { "type": "string", "description": "Game ID e.g. LOGO" },
+        "seminarHallId": { "type": "string", "description": "Associated seminar hall ID" },
+        "startedAt": { "type": "string", "description": "Session start timestamp" },
+        "stoppedAt": { "type": "string", "description": "Session stop timestamp" },
+        "status": { "type": "string", "enum": ["active", "completed", "stopped"] },
+        "totalParticipants": { "type": "number", "description": "Number of participant attempts" },
+        "completedParticipants": { "type": "number", "description": "Number of completions" }
+      },
+      "required": ["sessionId", "gameId", "seminarHallId", "status"]
+    },
+    "student": {
+      "title": "Student Registration",
+      "description": "Student registration record permanently binding student admission number to their chosen seminar hall",
+      "properties": {
+        "admissionNumber": { "type": "string", "description": "Student admission number e.g. 001/AIM/2026" },
+        "hallId": { "type": "string", "description": "Locked seminar hall ID e.g. HALL_1" },
+        "hallName": { "type": "string", "description": "Display name of seminar hall" },
+        "registeredAt": { "type": "string", "description": "Initial registration timestamp" },
+        "lastLoginAt": { "type": "string", "description": "Last login timestamp" }
+      },
+      "required": ["admissionNumber", "hallId", "hallName", "registeredAt"]
+    }
+  }
+}

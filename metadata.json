@@ -1,0 +1,8 @@
+{
+  "name": "DevPath 2.O",
+  "description": "DevPath 2.O - Orientation Program in collaboration with AIKYAM by GDG on Campus Sri Vasavi Engineering College.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
